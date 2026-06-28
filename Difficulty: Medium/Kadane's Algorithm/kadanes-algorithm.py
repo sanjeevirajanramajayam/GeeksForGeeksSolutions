@@ -1,16 +1,12 @@
 class Solution:
-    def maxSubarraySum(self, arr):
+    def maxSubarraySum(self, nums):
         # Code here
-        maxi = float('-inf')
+        maxSum = float('-inf')
         currSum = 0
-        start = 0
-        for i in range(len(arr)):
-            currSum += arr[i]
-            if maxi < currSum:
-                maxi = currSum
-                end = i
+        for i in range(len(nums)):
+            currSum += nums[i]
+            maxSum = max(maxSum, currSum)
             if currSum < 0:
                 currSum = 0
-                start = i
-        # print(arr[start:end + 1])
-        return maxi
+                
+        return maxSum
