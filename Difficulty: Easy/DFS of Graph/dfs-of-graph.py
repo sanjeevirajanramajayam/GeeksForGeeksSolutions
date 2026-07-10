@@ -1,17 +1,17 @@
 class Solution:
     def dfs(self, adj):
         # code here
-        visited = [0] * len(adj)
-        visited[0] = 1
-        dfs = []
-        def DepthSearch(node):
-            visited[node] = 1
-            dfs.append(node)
-            
-            for i in adj[node]:
-                if not visited[i]:
-                    DepthSearch(i)
+        def dfs(i):
+            ans.append(i)
+            visited.add(i)
+            for node in adj[i]:
+                if node not in visited:
+                    dfs(node)
+                    
+        visited = set()
+        ans = []
         
-        DepthSearch(0)
-        
-        return dfs
+        for i in range(len(adj)):
+            if i not in visited:
+                dfs(i)
+        return ans
