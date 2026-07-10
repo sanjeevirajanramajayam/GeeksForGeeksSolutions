@@ -1,32 +1,27 @@
 from collections import deque
 class Solution:
 	def isCycle(self, V, edges):
-		#Code here
-		def bfs(node, parent):
-		    queue = deque([(node, parent)])
-		    while queue:
-		       node, parent = queue.popleft()
-		       for i in adjList[node]:
-		          # bfs(i, node)
-		          if i != parent and i in visited:
-		              return True
-		          
-		          if i not in visited:
-		              #bfs(i, node)
-		              queue.append((i, node))
-		              visited.add(i)
-		    return False
-		    
-		adjList = [[] for i in range(V)]
-		visited = set([])
-		for startNode, endNode in edges:
-		    adjList[startNode].append(endNode)
-		    adjList[endNode].append(startNode)
-		
-		for i in range(V):
-		    if i not in visited:
-		        visited.add(i)
-		        if bfs(i, -1) == True:
-		            return True
-		
-		return False
+	    adj = [[] for i in range ((V))]
+	    for startNode, endNode in (edges):
+	        adj[startNode].append(endNode)
+	        adj[endNode].append(startNode)
+
+        def dfs(i, parent):
+            # ans.append(i)
+            visited.add(i)
+            for node in adj[i]:
+                if node != parent and node in visited:
+                    return True
+                if node not in visited:
+                    if dfs(node, i):
+                        return True
+            return False
+                    
+        visited = set()
+        ans = []
+        
+        for i in range(len(adj)):
+            if i not in visited:
+                if dfs(i, -1):
+                    return True
+        return False
