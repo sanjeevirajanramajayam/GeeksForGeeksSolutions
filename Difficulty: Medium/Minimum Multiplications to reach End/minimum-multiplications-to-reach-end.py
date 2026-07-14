@@ -1,25 +1,16 @@
-#User function Template for python3
-
-from typing import List
 from collections import deque
- 
 class Solution:
-    
-    def minimumMultiplications(self, arr : List[int], start : int, end : int) -> int:
+    def minSteps(self, arr, start, end):
         # code here
-        
-        queue = deque([(0, start)])
-        distArray = [float('inf') for i in range(100000)]
-        distArray[start] = 0
+        visited = [False] * 1001 
+        queue = deque([(start, 0)])
         while queue:
-            stops, num = queue.popleft()
-            for i in arr:
-                mul = (i * num) % 100000
-                if stops + 1 < distArray[mul]:
-                    distArray[mul] = stops + 1
-                    queue.append((stops + 1, mul))
-        
-        if distArray[end] == float('inf'):
-            return -1
-        
-        return distArray[end]
+            num, ops = queue.popleft()
+            if num == end:
+                return ops
+            for x in arr:
+                newNum = (num * x) % 1000
+                if visited[newNum] is False:
+                    queue.append((newNum, ops + 1))
+                    visited[newNum] = True
+        return -1
