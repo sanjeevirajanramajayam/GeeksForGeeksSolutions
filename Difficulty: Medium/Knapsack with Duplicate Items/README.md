@@ -11,4 +11,4 @@
 <pre><span style="font-size: 14pt;"><strong>Input: </strong>val[] = [6, 8, 7, 100], wt[] = [2, 3, 4, 5], capacity = 1
 <strong>Output:</strong> 0
 <strong>Explanation: </strong>We can't pick any element. Hence, total profit is 0.</span></pre>
-<p><span style="font-size: 14pt;"><strong>Constraints:</strong><br>1 ≤ val.size() = wt.size() ≤ 1000<br>1 ≤ capacity ≤ 1000<br>1 ≤ val[i], wt[i] ≤ 100</span></p></div><p><span style=font-size:18px><strong>Company Tags : </strong><br><code>Amazon</code>&nbsp;<code>Google</code>&nbsp;<br><p><span style=font-size:18px><strong>Topic Tags : </strong><br><code>Dynamic Programming</code>&nbsp;<code>Algorithms</code>&nbsp;
+<p><span style="font-size: 14pt;"><strong>Constraints:</strong><br>1 ≤ val.size() = wt.size() ≤ 1000<br>1 ≤ capacity ≤ 1000<br>1 ≤ val[i], wt[i] ≤ 100</span></p></div><p><span style=font-size:18px><strong>Company Tags : </strong><br><code>Amazon</code>&nbsp;<code>Google</code>&nbsp;<br><p><span style=font-size:18px><strong>Topic Tags : </strong><br><code>Dynamic Programming</code>&nbsp;
