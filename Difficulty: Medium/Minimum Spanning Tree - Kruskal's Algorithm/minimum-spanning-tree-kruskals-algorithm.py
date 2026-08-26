@@ -1,4 +1,3 @@
-#User function Template for python3
 from typing import List
 
 class Solution:
@@ -6,36 +5,37 @@ class Solution:
         # code here
         class DSU:
             def __init__(self):
-                self.rank = [0 for i in range(V)]
                 self.parent = [i for i in range(V)]
-                self.totalWt = 0
-
+                self.rank = [0 for i in range(V)]
+            
             def find_parent(self, node):
                 if node == self.parent[node]:
                     return node
                 self.parent[node] = self.find_parent(self.parent[node])
                 return self.parent[node]
             
-            def union(self, x, y, wt):
-                xP = self.find_parent(x)
-                yP = self.find_parent(y)
+            def union(self, u, v):
+                Upar = self.find_parent(u)
+                Vpar = self.find_parent(v)
                 
-                if xP == yP:
-                    return 
-                self.totalWt += wt
-                if self.rank[xP] > self.rank[yP]:
-                    self.parent[yP] = xP
-                elif self.rank[xP] < self.rank[yP]:
-                    self.parent[xP] = yP
+                if Upar == Vpar:
+                    return
+                
+                if self.rank[Upar] > self.rank[Vpar]:
+                    self.parent[Vpar] = Upar
+                elif self.rank[Upar] < self.rank[Vpar]:
+                    self.parent[Upar] = Vpar
                 else:
-                    self.parent[xP] = yP
-                    self.rank[yP] += 1
+                    self.parent[Upar] = Vpar
+                    self.rank[Vpar] += 1
         
         dsu = DSU()
-        
-        edges = sorted(edges, key=lambda x: x[2])
-        
+        ans = 0
+        edges.sort(key=lambda x: (x[2]))
         for startNode, endNode, wt in edges:
-            dsu.union(startNode, endNode, wt)
-        
-        return dsu.totalWt
+            if dsu.find_parent(startNode) == dsu.find_parent(endNode):
+                continue
+            dsu.union(startNode, endNode)
+            ans += wt
+        return ans
+                    
