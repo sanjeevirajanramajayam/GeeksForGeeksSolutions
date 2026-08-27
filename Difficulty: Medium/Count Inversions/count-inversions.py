@@ -1,37 +1,40 @@
 class Solution:
-    def inversionCount(self, nums):
-        # Code Here
-        cnt = 0
-        def merge(low, mid, high, nums):
-            nonlocal cnt
-            left = low
-            right = mid + 1
-            temp = []
-            while left <= mid and right <= high:
-                if nums[left] <= nums[right]:
-                    temp.append(nums[left])
-                    left += 1
+    def inversionCount(self, arr):
+        # code here
+        ans = 0
+        def merge(l1, r1, l2, r2):
+            nonlocal ans
+            newArr = []
+            i = l1
+            j = l2
+            while i <= r1 and j <= r2:
+                if arr[i] > arr[j]:
+                    newArr.append(arr[j])
+                    j += 1
+                    ans += (r1 - i + 1)
                 else:
-                    temp.append(nums[right])
-                    cnt += mid - left + 1
-                    right += 1
-            while left <= mid:
-                temp.append(nums[left])
-                left += 1
-            while right <= high:
-                temp.append(nums[right])
-                right += 1
-            # print(low, mid, high)
-            for i in range(low, high + 1):
-                nums[i] = temp[i-low]
+                    newArr.append(arr[i])
+                    i += 1
 
-        def mergeSort(low, high, nums):
+            while i <= r1:
+                newArr.append(arr[i])
+                i += 1
+
+            while j <= r2:
+                newArr.append(arr[j])
+                j += 1
+            # print(arr[l1:r2+1], newArr)
+            for i in range(l1, r2 + 1):
+                arr[i] = newArr[i - l1]
+            # print(arr[l1:r2+1], newArr)
+
+        def mergeSort(low, high):
+            # print(low, high)
             if low >= high:
                 return
             mid = (low + high) // 2
-            mergeSort(low, mid, nums)
-            mergeSort(mid + 1, high, nums)
-            merge(low, mid, high, nums)
-        
-        mergeSort(0, len(nums) - 1, nums)
-        return cnt
+            left = mergeSort(low, mid)
+            right = mergeSort(mid + 1, high)
+            return merge(low, mid, mid + 1, high)
+        mergeSort(0, len(arr) - 1)
+        return ans
